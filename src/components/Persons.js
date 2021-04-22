@@ -1,15 +1,15 @@
 import React from "react";
 
-const Persons = ({ name, phone }) => {
+const Persons = ({ persons, filterString }) => {
   const filteredElements = persons
     .filter((person) => person.name.includes(filterString))
     .map((person) => (
-      <Persons key={person.key} name={person.name} phone={person.phone} />
+      <div key={person.name}>{person.name} {person.phone}</div>
     ));
 
   return (
     <div>
-      {name} {phone}
+      {filteredElements}
     </div>
   );
 };
