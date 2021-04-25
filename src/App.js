@@ -48,8 +48,8 @@ const App = () => {
       <Filter handleChange={handlePersonSearch} />
 
       <h2>add a new</h2>
-      <PersonForm 
-        handleSubmit={addPerson} 
+      <PersonForm
+        handleSubmit={addPerson}
         valueNewName={newName}
         valueNewPhone={newPhone}
         handlePersonNameChange={handlePersonNameChange}
@@ -60,7 +60,6 @@ const App = () => {
       <Persons persons={persons} filterString={filterString} />
     </div>
   );
-
 };
 
 export default App;
