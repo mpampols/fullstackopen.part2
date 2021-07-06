@@ -28,6 +28,7 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newPhone,
+      id: ""
     };
 
     if (persons.filter((persons) => persons.name === newName).length > 0) {
@@ -42,6 +43,7 @@ const App = () => {
         personService
           .update(personToUpdate[0].id, newPerson)
           .then((response) => {
+            newPerson.id = response.id;
             setPersons(
               persons.map((person) =>
                 person.name !== newPerson.name ? person : newPerson
@@ -60,6 +62,7 @@ const App = () => {
       }
     } else {
       personService.create(newPerson).then((response) => {
+        newPerson.id = response.id;
         setPersons(persons.concat(newPerson));
         setMessage({
           content: `Added ${newPerson.name}`,
