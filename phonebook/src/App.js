@@ -52,7 +52,7 @@ const App = () => {
           })
           .catch((error) => {
             setMessage({
-              content: `Information of ${newPerson.name} has already been removed from the server`,
+              content: error.response.data.json,
               status: "ko",
             });
             setTimeout(() => {
@@ -61,16 +61,23 @@ const App = () => {
           });
       }
     } else {
-      personService.create(newPerson).then((response) => {
-        newPerson.id = response.id;
-        setPersons(persons.concat(newPerson));
-        setMessage({
-          content: `Added ${newPerson.name}`,
-          status: "ok",
-        });
-        setTimeout(() => {
-          setMessage({ content: null, status: "ok" });
-        }, 5000);
+      personService.create(newPerson)
+        .then((response) => {
+          newPerson.id = response.id;
+          setPersons(persons.concat(newPerson));
+          setMessage({
+            content: `Added ${newPerson.name}`,
+            status: "ok",
+          });
+          setTimeout(() => {
+            setMessage({ content: null, status: "ok" });
+          }, 5000)
+        })
+        .catch((error) => {
+          setMessage({
+            content: error.response.data.json,
+            status: "ko",
+          });
       });
     }
   };
